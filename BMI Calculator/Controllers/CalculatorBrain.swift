@@ -12,20 +12,22 @@ struct CalculatorBrain {
     
     var bmi: BMI?
     
-    func getColor() -> UIColor {
-        let bmiColor = bmi?.color ?? .label
-        return bmiColor
+    // Fungsi untuk mengemabalikan hasil calculate height dengan weight dari calculateBMI
+    func getBMIValue() -> String {
+        let bmiTo1DecimalPlace = String(format: "%.1f", bmi?.value ?? 0.0)
+        return bmiTo1DecimalPlace
     }
+    
     
     func getAdvice() -> String {
         let bmiAdvice = bmi?.advice ?? "Tidak ada nilai"
         return bmiAdvice
     }
     
-    // Fungsi untuk mengemabalikan hasil calculate height dengan weight dari calculateBMI
-    func getBMIValue() -> String {
-        let bmiTo1DecimalPlace = String(format: "%.1f", bmi?.value ?? 0.0)
-        return bmiTo1DecimalPlace
+    
+    func getColor() -> UIColor {
+        let bmiColor = bmi?.color ?? .white
+        return bmiColor
     }
     
     // Fungsi untuk calculate height dengan weight
@@ -33,11 +35,11 @@ struct CalculatorBrain {
         let bmiValue = weight / (height * height)
         
         if bmiValue < 18.5 {
-            bmi = BMI(value: bmiValue, advice: "Eat anu", color: .blue)
+            bmi = BMI(value: bmiValue, advice: "Eat more pies!", color: .blue)
         } else if bmiValue < 24.9 {
-            bmi = BMI(value: bmiValue, advice: "Eat eta", color: .green)
+            bmi = BMI(value: bmiValue, advice: "Fit as a fiddle", color: .green)
         } else {
-            print("Overweight")
+            bmi = BMI(value: bmiValue, advice: "Eat less pies!", color: .red)
         }
     }
 }
